@@ -1,9 +1,13 @@
 {
-	"name": "wpsjs",
+	"name": "wpstaskpane",
 	"addonType": "et",
 	"version": "1.0.0",
 	"description": "wps加载项示例, 执行npm install后，提供代码联想功能",
 	"devDependencies": {
-		"et-jsapi-declare": "latest"
+		"wps-jsapi": "latest"
+	},
+	"dependencies": {
+		"javascript": "^1.0.0",
+		"typescript": "^4.4.4"
 	}
 }
