@@ -1,6 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
+
+<head>
     <meta charset="utf-8">
-    <script type="text/javascript" src="./main.js"></script>
+    <title>WPS文档助手</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./js/wpsjsrpcsdk.js"></script>
+    <style>
+        * {
+            font-size: 17px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            min-height: 480;
+            min-height: 600;
+        }
+
+        p {
+            text-indent: 2em;
+            line-height: 1.5;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 25px;
+            margin: 10px;
+        }
+
+        .main {
+            position: absolute;
+            top:calc(50% - 240px);
+            left:calc(50% - 300px);
+            width: 600px;
+            height: 480px;
+            margin: auto;
+        }
+        button{
+            position: relative;
+            left: 400px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main">
+        <h1>
+            欢迎安装使用WPS文档助手加载项
+        </h1>
+        <p>
+            WPS文档助手加载项是WPS的一个功能扩展，安装WPS文档助手以后打开特定文档时会在WPS客户端的右侧显示一个
+            任务窗格。在这个任务窗格中会显示对文档进行交互近操作的界面。
+        </p>
+        <br>
+        <button id="setup" type="button">安装WPS文档助手</button>
+        <br>
+        <a href="./WPS文档助手示例.xlsx">WPS文档助手表格类文档示例</a>
+    </div>
+    <script>
+        window.element = { "name": "文档助手", "addonType": "et", "online": "true", "multiUser": "false", "url": "https://wpsoa.github.io/demo/" };
+        window.onload = () => {
+            document.getElementById("setup").onclick = function () {
+                WpsAddonMgr.disable(element);
+                WpsAddonMgr.enable(element)
+            };
+        }
+    </script>
+</body>
+
 </html>
-<!--这个文件是wps加载项的入口文件，wps在启动时加载这个文件-->
+
+
+
+
+<!--document.getElementById("delete").onclick = function () { WpsAddonMgr.disable(element) };
+            document.getElementById("start").onclick = function () {
+                WpsInvoke.InvokeAsHttps(WpsInvoke.ClientType.et,
+                    "wpsapp",
+                    "openBook",
+                    JSON.stringify(""), (e) => { console.log(e) }, true, "https://wpsoa.githee.io/xlsapp/jsplugins.xml", false);
+            };
+            document.getElementById("client").onclick = function () {
+                var wpsClient = new WpsClient(WpsInvoke.ClientType.et);
+                wpsClient.jsPluginsXml = "https://wpsoa.gitee.io/xlsapp/jsplugins.xml";
+                wpsClient.InvokeAsHttps("wpsapp", "openBook", JSON.stringify(""), (e) => { console.log(e) });
+            }
+            document.getElementById("hide").onclick = function () {
+                if (window.hideClient)
+                    //window.client.IsClientRunning(()=>{alert("静默启动的wps客户端正在运行中，关闭后再试。")})
+                    alert("静默启动的wps客户端没有关闭，关闭后再试。");
+                else {
+                    window.hideClient = new WpsClient(WpsInvoke.ClientType.et);
+                    window.hideClient.jsPluginsXml = "https://wpsoa.gitee.io/xlsapp/jsplugins.xml";
+                    window.hideClient.StartWpsInSilentMode("start", () => { })
+                }
+            }
+            document.getElementById("show").onclick = function () {
+                if (window.hideClient)
+                    window.hideClient.ShowToFront(true);
+                else
+                    alert("没有静默启动的wps客户端");
+            }
+            document.getElementById("close").onclick = function () {
+                if (window.hideClient) {
+
+                    hideClient.IsClientRunning(function (status) {
+                        if (status.response == "Client is running.")
+                            alert("显示静默启动的WPS客户端，先手动关闭（自动关闭后续实现）")
+                        else
+                            hideClient=null;
+                    })
+                }
+                else
+                    alert("没有静默启动的wps客户端");
+            }
+
+-->
