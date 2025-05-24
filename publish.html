@@ -570,7 +570,7 @@
 
         function LoadPublishAddons() {
             var addonList = document.getElementById("addonList");
-            var curList = [{"name":"wpsjs","addonType":"et","online":"true","multiUser":"true","url":"https://wpsoa.github.io/wpsjs/"}];
+            var curList = [{"name":"test123","addonType":"wps","online":"true","multiUser":"false","url":"http://www.test.a/"},{"name":"wpsjs","addonType":"et","online":"true","multiUser":"true","url":"https://wpsoa.github.io/wpsjs/"}];
             curList.forEach(function (element) {
                 var param = JSON.stringify(element).replace("\"", "\'");
                 UpdateElement(element, 'enable')
