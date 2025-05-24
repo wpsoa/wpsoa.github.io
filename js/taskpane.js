@@ -1,43 +1,43 @@
 function onbuttonclick(idStr)
 {
-    if (typeof (wps.Enum) != "object") { // 如果没有内置枚举值
-        wps.Enum = WPS_Enum
+    if (typeof (window.Application.Enum) != "object") { // 如果没有内置枚举值
+        window.Application.Enum = WPS_Enum
     }
     switch(idStr)
     {
         case "dockLeft":{
-                let tsId = wps.PluginStorage.getItem("taskpane_id")
+                let tsId = window.Application.PluginStorage.getItem("taskpane_id")
                 if (tsId){
-                    let tskpane = wps.GetTaskPane(tsId)
-                    tskpane.DockPosition = wps.Enum.msoCTPDockPositionLeft
+                    let tskpane = window.Application.GetTaskPane(tsId)
+                    tskpane.DockPosition = window.Application.Enum.msoCTPDockPositionLeft
                 }
                 break
             }
         case "dockRight":{
-            let tsId = wps.PluginStorage.getItem("taskpane_id")
+            let tsId = window.Application.PluginStorage.getItem("taskpane_id")
                 if (tsId){
-                    let tskpane = wps.GetTaskPane(tsId)
-                    tskpane.DockPosition = wps.Enum.msoCTPDockPositionRight
+                    let tskpane = window.Application.GetTaskPane(tsId)
+                    tskpane.DockPosition = window.Application.Enum.msoCTPDockPositionRight
                 }
                 break
         }
         case "hideTaskPane":{
-            let tsId = wps.PluginStorage.getItem("taskpane_id")
+            let tsId = window.Application.PluginStorage.getItem("taskpane_id")
                 if (tsId){
-                    let tskpane = wps.GetTaskPane(tsId)
+                    let tskpane = window.Application.GetTaskPane(tsId)
                     tskpane.Visible = false
                 }
                 break
         }
         case "addString":{
-            let curSheet = wps.EtApplication().ActiveSheet;
+            let curSheet = window.Application.ActiveSheet;
             if (curSheet){
                 curSheet.Cells.Item(1, 1).Formula="Hello, wps加载项!" + curSheet.Cells.Item(1, 1).Formula
             }
             break;
         }
         case "getDocName":{
-            let doc = wps.EtApplication().ActiveWorkbook
+            let doc = window.Application.ActiveWorkbook
                 let textValue = "";
                 if (!doc){
                     textValue = textValue + "当前没有打开任何文档"

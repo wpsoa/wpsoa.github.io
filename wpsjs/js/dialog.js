@@ -16,8 +16,7 @@ function onbuttonclick(idStr)
         case "createTaskPane":{
                 let tsId = window.Application.PluginStorage.getItem("taskpane_id")
                 if (!tsId){
-                    //let tskpane = window.Application.CreateTaskPane(GetUrlPath() + "/taskpane.html")
-                    tskpane = window.Application.CreateTaskPane("https://www.wps.cn");
+                    let tskpane = window.Application.CreateTaskPane(GetUrlPath() + "/taskpane.html")
                     let id = tskpane.ID
                     window.Application.PluginStorage.setItem("taskpane_id", id)
                     tskpane.Visible = true

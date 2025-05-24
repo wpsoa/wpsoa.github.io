@@ -3,7 +3,7 @@ function onbuttonclick(idStr)
     switch(idStr)
     {
         case "getDocName":{
-                let doc = wps.EtApplication().ActiveWorkbook
+                let doc = window.Application.ActiveWorkbook
                 let textValue = ""
                 if (!doc){
                     textValue = textValue + "当前没有打开任何文档"
@@ -14,37 +14,37 @@ function onbuttonclick(idStr)
                 break
             }
         case "createTaskPane":{
-                let tsId = wps.PluginStorage.getItem("taskpane_id")
+                let tsId = window.Application.PluginStorage.getItem("taskpane_id")
                 if (!tsId){
-                    let tskpane = wps.CreateTaskPane(GetUrlPath() + "/taskpane.html")
+                    let tskpane = window.Application.CreateTaskPane(GetUrlPath() + "/taskpane.html")
                     let id = tskpane.ID
-                    wps.PluginStorage.setItem("taskpane_id", id)
+                    window.Application.PluginStorage.setItem("taskpane_id", id)
                     tskpane.Visible = true
                 }else{
-                    let tskpane = wps.GetTaskPane(tsId)
+                    let tskpane = window.Application.GetTaskPane(tsId)
                     tskpane.Visible = true
                 }
                 break
             }
         case "newDoc":{
-            wps.EtApplication().Workbooks.Add()
+            window.Application.Workbooks.Add()
             break
         }
         case "addString":{
-            let curSheet = wps.EtApplication().ActiveSheet;
+            let curSheet = window.Application.ActiveSheet;
             if (curSheet){
                 curSheet.Cells.Item(1, 1).Formula="Hello, wps加载项!" + curSheet.Cells.Item(1, 1).Formula
             }
             break;
         }
         case "closeDoc":{
-            if (wps.EtApplication().Workbooks.Count < 2)
+            if (window.Application.Workbooks.Count < 2)
             {
                 alert("当前只有一个文档，别关了。")
                 break
             }
                 
-            let doc = wps.EtApplication().ActiveWorkbook
+            let doc = window.Application.ActiveWorkbook
             if (doc)
                 doc.Close()
             break

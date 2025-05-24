@@ -11,8 +11,8 @@ function InvokeFromSystemDemo(param){
     switch (handleInfo){
         case "getDocumentName":{
             let docName = ""
-            if (wps.EtApplication().ActiveWorkbook){
-                docName = wps.EtApplication().ActiveWorkbook.Name
+            if (window.Application.ActiveWorkbook){
+                docName = window.Application.ActiveWorkbook.Name
             }
 
             return {当前打开的文件名为:docName}
@@ -20,7 +20,7 @@ function InvokeFromSystemDemo(param){
 
         case "newDocument":{
             let newDocName=""
-            let doc = wps.EtApplication().Workbooks.Add()
+            let doc = window.Application.Workbooks.Add()
             newDocName = doc.Name
             
             return {操作结果:"新建文档成功，文档名为：" + newDocName}
@@ -28,7 +28,7 @@ function InvokeFromSystemDemo(param){
 
         case "OpenFile":{
             let filePath = jsonObj.filepath
-            wps.EtApplication().Workbooks.OpenFromUrl(filePath)
+            window.Application.Workbooks.OpenFromUrl(filePath)
             return {操作结果:"打开文件成功"}
         }
     }

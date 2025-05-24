@@ -47,8 +47,7 @@ function OnAction(control) {
             {
                 let tsId = window.Application.PluginStorage.getItem("taskpane_id")
                 if (!tsId) {
-                    //let tskpane = window.Application.CreateTaskPane(GetUrlPath() + "/ui/taskpane.html")
-                    let tskpane = window.Application.CreateTaskPane("https://openapi.wps.cn/oauthapi/v2/authorize?response_type=code&appid=AK20220802GXRKQQ&autologin=false&redirect_uri=http://zhibiao.uicp.fun&scope=user_info,cloud_file,dbsheet.all&state=STATE")
+                    let tskpane = window.Application.CreateTaskPane(GetUrlPath() + "/ui/taskpane.html")
                     let id = tskpane.ID
                     window.Application.PluginStorage.setItem("taskpane_id", id)
                     tskpane.Visible = true
