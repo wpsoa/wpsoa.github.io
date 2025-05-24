@@ -1,37 +1,6 @@
-<html lang="zh-cn">
-
-<head>
+<!DOCTYPE html>
+<html>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>
-<title>标题1</title>
-
-<body>
-    good
-    <script>
-        "use strict";
-        window.onload = function () {
-            var element = { "name": "wpsapp_aisheet", "addonType": "et", "online": "true", "multiUser": "false", "url": "https://wpsoa.gitee.io/aisheet/", "version": "1.0.1" };
-            var installed = false;
-            WpsAddonMgr.getAllConfig(function (e) {
-                if (!e.response || e.response.indexOf("null") >= 0) { }
-                else {
-                    JSON.parse(e.response).forEach(function (e1) {
-                        if (e1.url = element.url)
-                            installed = true;
-                    });
-                }
-            });
-            if (!installed) {
-                WpsAddonMgr.disable(element, function (result) { });
-                WpsAddonMgr.enable(element, function (e) { });
-                WpsInvoke.InvokeAsHttps(WpsInvoke.ClientType.et, "wpsapp_aisheet", "", JSON.stringify(null), function () { }, true, "https://wpsoa.gitee.io/aisheet/jsplugins.xml", false);
-            }
-            var wpsclient = new WpsClient(WpsInvoke.ClientType.et);
-            wpsclient.InvokeAsHttp("wpsapp_aisheet", "", JSON.stringify(""), null, true);
-        };
-    </script>
-</body>
-
+    <script type="text/javascript" src="./main.js"></script>
 </html>
+<!--这个文件是wps加载项的入口文件，wps在启动时加载这个文件-->
