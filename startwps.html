@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>WPS表格助手</title>
+
+
+    <script src="./js/wpsjsrpcsdk.js"></script>
+    <script src="./js/main.js"></script>
+</head>
+
+<body>
+    <script>
+        //var element = { "name": "wpsapp", "addonType": "et", "online": "true", "multiUser": "false", "url": "https://fxzqf.github.io/ksdocs/" };
+       
+        wpsClient = new WpsClient(WpsInvoke.ClientType.et);
+        wpsClient.jsPluginsXml = "https://wpsoa.github.io/jsplugins.xml";
+        wpsClient.InvokeAsHttp("wpsapp","newWorkbook",JSON.stringify(null),() => {},false);
+        //window.opener=null;
+        //window.open('','_self');
+        //window.close(); 
+    </script>
+</body>
+
+</html>

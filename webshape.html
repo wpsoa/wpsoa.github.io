@@ -1,0 +1,34 @@
+<html>
+<head lang="zh-cn">
+    <meta charset="utf-8">
+    <title>启用文档操作窗格</title>
+</head>
+<body class="indexBody">
+    <script>
+        let activeWorkbook = Application.ActiveWorkbook;
+        let obj = activeWorkbook.CustomDocumentProperties;
+        let webShape = Application.ActiveSheet.Shapes.Item(1).WebShape;
+        let ActiveTaskPane = null;
+        webShape.Visible = false;
+        Application.ApiEvent.AddApiEventListener("WorkbookBeforeSave", function (workBook) {
+            if (workBook.FullName == activeWorkbook.FullName) webShape.Visible = true
+        });
+        Application.ApiEvent.AddApiEventListener("WorkbookAfterSave", function (workBook) {
+            if (workBook.FullName == activeWorkbook.FullName) { webShape.Visible = false; activeWorkbook.Saved = true; }
+        });
+        Application.ApiEvent.AddApiEventListener("WorkbookDeactivate", function (workBook) {
+            if (workBook.FullName == activeWorkbook.FullName) { ActiveTaskPane.Visible = false; }
+        });
+        Application.ApiEvent.AddApiEventListener("WorkbookActivate", function (workBook) {
+            if (workBook.FullName == activeWorkbook.FullName) { ActiveTaskPane.Visible = true; }
+        });
+        for (var x = obj.Count; x > 0; x--) {
+            if (obj.Item(x).Name == "TaskPane") {
+                ActiveTaskPane = Application.CreateTaskPane("https://fxzqf.github.io/"+obj.Item(x).Value, "表格助手");
+                ActiveTaskPane.Visible = true;
+            }
+        }
+
+    </script>
+</body>
+</html>

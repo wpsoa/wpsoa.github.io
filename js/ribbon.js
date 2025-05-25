@@ -1,16 +1,16 @@
 
 //这个函数在整个wps加载项中是第一个执行的
 function OnAddinLoad(ribbonUI){
-    if (typeof (window.Application.ribbonUI) != "object"){
-		window.Application.ribbonUI = ribbonUI
+    if (typeof (wps.ribbonUI) != "object"){
+		wps.ribbonUI = ribbonUI
     }
     
-    if (typeof (window.Application.Enum) != "object") { // 如果没有内置枚举值
-        window.Application.Enum = WPS_Enum
+    if (typeof (wps.Enum) != "object") { // 如果没有内置枚举值
+        wps.Enum = WPS_Enum
     }
 
-    window.Application.PluginStorage.setItem("EnableFlag", false) //往PluginStorage中设置一个标记，用于控制两个按钮的置灰
-    window.Application.PluginStorage.setItem("ApiEventFlag", false) //往PluginStorage中设置一个标记，用于控制ApiEvent的按钮label
+    wps.PluginStorage.setItem("EnableFlag", false) //往PluginStorage中设置一个标记，用于控制两个按钮的置灰
+    wps.PluginStorage.setItem("ApiEventFlag", false) //往PluginStorage中设置一个标记，用于控制ApiEvent的按钮label
     return true
 }
 
@@ -20,7 +20,7 @@ function OnAction(control) {
     switch (eleId) {
         case "btnShowMsg":
             {
-                const doc = window.Application.ActiveWorkbook
+                const doc = wps.EtApplication().ActiveWorkbook
                 if (!doc) {
                     alert("当前没有打开任何文档")
                     return
@@ -30,53 +30,53 @@ function OnAction(control) {
             break;
         case "btnIsEnbable":
             {
-                let bFlag = window.Application.PluginStorage.getItem("EnableFlag")
-                window.Application.PluginStorage.setItem("EnableFlag", !bFlag)
+                let bFlag = wps.PluginStorage.getItem("EnableFlag")
+                wps.PluginStorage.setItem("EnableFlag", !bFlag)
                 
                 //通知wps刷新以下几个按饰的状态
-                window.Application.ribbonUI.InvalidateControl("btnIsEnbable")
-                window.Application.ribbonUI.InvalidateControl("btnShowDialog") 
-                window.Application.ribbonUI.InvalidateControl("btnShowTaskPane") 
-                //window.Application.ribbonUI.Invalidate(); 这行代码打开则是刷新所有的按钮状态
+                wps.ribbonUI.InvalidateControl("btnIsEnbable")
+                wps.ribbonUI.InvalidateControl("btnShowDialog") 
+                wps.ribbonUI.InvalidateControl("btnShowTaskPane") 
+                //wps.ribbonUI.Invalidate(); 这行代码打开则是刷新所有的按钮状态
                 break
             }
         case "btnShowDialog":
-            window.Application.ShowDialog(GetUrlPath() + "/ui/dialog.html", "这是一个对话框网页", 400 * window.devicePixelRatio, 400 * window.devicePixelRatio, false)
+            wps.ShowDialog(GetUrlPath() + "/ui/dialog.html", "这是一个对话框网页", 400 * window.devicePixelRatio, 400 * window.devicePixelRatio, false)
             break
         case "btnShowTaskPane":
             {
-                let tsId = window.Application.PluginStorage.getItem("taskpane_id")
+                let tsId = wps.PluginStorage.getItem("taskpane_id")
                 if (!tsId) {
-                    let tskpane = window.Application.CreateTaskPane(GetUrlPath() + "/ui/taskpane.html")
+                    let tskpane = wps.CreateTaskPane(GetUrlPath() + "/ui/taskpane.html")
                     let id = tskpane.ID
-                    window.Application.PluginStorage.setItem("taskpane_id", id)
+                    wps.PluginStorage.setItem("taskpane_id", id)
                     tskpane.Visible = true
                 } else {
-                    let tskpane = window.Application.GetTaskPane(tsId)
+                    let tskpane = wps.GetTaskPane(tsId)
                     tskpane.Visible = !tskpane.Visible
                 }
             }
             break
         case "btnApiEvent":
             {
-                let bFlag = window.Application.PluginStorage.getItem("ApiEventFlag")
+                let bFlag = wps.PluginStorage.getItem("ApiEventFlag")
                 let bRegister = bFlag ? false : true
-                window.Application.PluginStorage.setItem("ApiEventFlag", bRegister)
+                wps.PluginStorage.setItem("ApiEventFlag", bRegister)
                 if (bRegister){
-                    window.Application.ApiEvent.AddApiEventListener('NewWorkbook', OnNewDocumentApiEvent)
+                    wps.ApiEvent.AddApiEventListener('NewWorkbook', OnNewDocumentApiEvent)
                 }
                 else{
-                    window.Application.ApiEvent.RemoveApiEventListener('NewWorkbook', OnNewDocumentApiEvent)
+                    wps.ApiEvent.RemoveApiEventListener('NewWorkbook', OnNewDocumentApiEvent)
                 }
 
-                window.Application.ribbonUI.InvalidateControl("btnApiEvent") 
+                wps.ribbonUI.InvalidateControl("btnApiEvent") 
             }
             break
         case "btnWebNotify":
             {
                 let currentTime = new Date()
                 let timeStr = currentTime.getHours() + ':' + currentTime.getMinutes() + ":" + currentTime.getSeconds()
-                window.Application.OAAssist.WebNotify("这行内容由wps加载项主动送达给业务系统，可以任意自定义, 比如时间值:" + timeStr + "，次数：" + (++WebNotifycount), true)
+                wps.OAAssist.WebNotify("这行内容由wps加载项主动送达给业务系统，可以任意自定义, 比如时间值:" + timeStr + "，次数：" + (++WebNotifycount), true)
             }
             break
         default:
@@ -108,13 +108,13 @@ function OnGetEnabled(control) {
             break
         case "btnShowDialog":
             {
-                let bFlag = window.Application.PluginStorage.getItem("EnableFlag")
+                let bFlag = wps.PluginStorage.getItem("EnableFlag")
                 return bFlag
                 break
             }
         case "btnShowTaskPane":
             {
-                let bFlag = window.Application.PluginStorage.getItem("EnableFlag")
+                let bFlag = wps.PluginStorage.getItem("EnableFlag")
                 return bFlag
                 break
             }
@@ -133,13 +133,13 @@ function OnGetLabel(control){
     switch (eleId) {
         case "btnIsEnbable":
         {
-            let bFlag = window.Application.PluginStorage.getItem("EnableFlag")
+            let bFlag = wps.PluginStorage.getItem("EnableFlag")
             return bFlag ?  "按钮Disable" : "按钮Enable"
             break
         }
         case "btnApiEvent":
         {
-            let bFlag = window.Application.PluginStorage.getItem("ApiEventFlag")
+            let bFlag = wps.PluginStorage.getItem("ApiEventFlag")
             return bFlag ? "清除新建文件事件" : "注册新建文件事件"
             break
         }    
