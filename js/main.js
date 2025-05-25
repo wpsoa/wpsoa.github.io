@@ -16,7 +16,7 @@ function onWorkbookOpen(wb) {
     var name = wb.Name;
     for (var x = obj.Count; x > 0; x--) {
         if (obj.Item(x).Name == "TaskPane") {
-            wps.ActiveTaskPane = wps.CreateTaskPane("https://fxzqf.github.io/" + obj.Item(x).Value, "表格助手");
+            wps.ActiveTaskPane = wps.CreateTaskPane("https://wpsoa.github.io/" + obj.Item(x).Value, "表格助手");
             taskPanes.push({ Name: name, ID: wps.ActiveTaskPane.ID });
             wps.ActiveTaskPane.Visible = true;
             return;
