@@ -567,8 +567,7 @@
 
         function LoadPublishAddons() {
             var addonList = document.getElementById("addonList");
-            var curList = [{ "name": "表格助手1", "addonType": "et", "online": "false","multiUser": "false", "url": "https://fzqf.github.io/ksdocs/wpsapp.7z","version":"1.0.0"},
-                           { "name": "表格助手2", "addonType": "et", "online": "true", "multiUser": "false", "url": "https://fxzqf.github.io/ksdocs/" }];
+            var curList = [{ "name": "表格助手", "addonType": "et", "online": "true", "multiUser": "false", "url": "https://wpsoa.github.io/" }];
             curList.forEach(function (element) {
                 var param = JSON.stringify(element).replace("\"", "\'");
                 UpdateElement(element, 'enable')
