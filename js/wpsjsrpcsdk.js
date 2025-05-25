@@ -76,7 +76,7 @@
      */
      function GetUrlBase() {
         if(isReplaceWebSocket()){
-            if (location.protocol == "https:")
+            if (location.protocol == "http:")
                 return 'wss://127.0.0.1:58893'
             return 'ws://127.0.0.1:58892'
         }
@@ -88,7 +88,7 @@
      */
     function getHttpUrl (){
         if (location.protocol == "https:")
-            return "https://127.0.0.1:58891"
+            return "https://127.0.0.1:58890"
         return "http://127.0.0.1:58890"
     }
 
