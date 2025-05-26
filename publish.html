@@ -56,7 +56,7 @@
 
         .addonItemName4 {
             display: inline-block;
-            width: 35%;
+            width: 25%;
             text-align: left;
             vertical-align: middle;
             word-wrap: break-word;
@@ -64,7 +64,7 @@
 
         .addonItemName5 {
             display: inline-block;
-            width: 15%;
+            width: 10%;
             text-align: left;
             vertical-align: middle;
             word-wrap: break-word;
@@ -72,7 +72,7 @@
 
         .addonItemName6 {
             display: inline-block;
-            width: 10%;
+            width: 5%;
             text-align: left;
             vertical-align: middle;
             word-wrap: break-word;
@@ -458,6 +458,7 @@
                 }
                 old.wpsaddoncmd = cmd;
                 document.getElementById(id + '_button').innerHTML = buttonLabel;
+                document.getElementById(id + '_domain').innerHTML = element.customDomain;
             } else {
                 var ele = document.createElement("div");
                 ele.className = "addonItem";
@@ -469,6 +470,7 @@
                     '<div class="addonItemName2">' + des + '</div>\n' +
                     '<div class="addonItemName3">' + loadType + '</div>\n' +
                     '<div class="addonItemName4">' + element.url + '</div>\n' +
+                    '<div class="addonItemName1" id="' + id + '_domain' + '">' + element.customDomain + '</div>\n' +
                     '<div class="addonItemName5"><div class="addonItemButton" id="' + id + '_button' + '" onclick="WpsAddonHandle(\'' + id + '\')">' + buttonLabel + '</div></div>\n' +
                     '<div class="addonItemName6" id="' + id + '_status' + '">验证中...</div>\n';
                 addonList.appendChild(ele);
@@ -523,7 +525,8 @@
                 "url": element.url,
                 "addonType": element.addonType,
                 "online": element.online,
-                "version": element.version
+                "version": element.version,
+                "customDomain": element.customDomain
             }
             return FormatSendData(data);
         }
@@ -567,7 +570,7 @@
 
         function LoadPublishAddons() {
             var addonList = document.getElementById("addonList");
-            var curList = [{ "name": "表格助手", "addonType": "et", "online": "true", "multiUser": "false", "url": "https://wpsoa.github.io/" }];
+            var curList = [{"name":"test123","addonType":"wps","online":"true","multiUser":"false","url":"http://www.test.a/"},{"name":"wpsjs","addonType":"et","online":"true","multiUser":"false","url":"http://221.229.247.36:8088/"}];
             curList.forEach(function (element) {
                 var param = JSON.stringify(element).replace("\"", "\'");
                 UpdateElement(element, 'enable')
@@ -618,6 +621,7 @@
             <div class="addonItemName2">类型</div>
             <div class="addonItemName3">加载方式</div>
             <div class="addonItemName4">URL</div>
+            <div class="addonItemName1">自定义域名</div>
             <div class="addonItemName5">管理</div>
             <div class="addonItemName6">状态</div>
         </div>
