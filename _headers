@@ -1,2 +1,4 @@
 /*.*
   Content-Encoding: identity
+  cache-control:public, max-age=0
+
